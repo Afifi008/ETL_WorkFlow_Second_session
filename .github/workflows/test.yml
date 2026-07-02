@@ -16,3 +16,14 @@ jobs:
         run: pip install dbt-core dbt-sqlserver
       - name: run test data quality 
         run: pytest tests/test_data_quality.py
+  deploy:
+    name: Trigger Jenkins Deploy
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Jenkins job
+        run: |
+          curl -X POST \
+            "${{ secrets.JENKINS_URL }}/job/dbt-deploy/build" \
+            --user "admin:${{ secrets.JENKINS_API_TOKEN }}"
