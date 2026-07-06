@@ -74,7 +74,7 @@ def load() -> None:
 default_args = {
     "owner": "data-team",
     "depends_on_past": False,
-    "retries": 2,
+    "retries": 4,
     "retry_delay": timedelta(minutes=5),
 }
 
@@ -95,7 +95,7 @@ with DAG(
 
     transform_task = PythonOperator(
         task_id="transform",
-        python_callable=transformsd,
+        python_callable=transform,
     )
 
     load_task = PythonOperator(
