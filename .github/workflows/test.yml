@@ -38,18 +38,22 @@ jobs:
             data/clean_sales.csv
             data/sales_by_category.csv
   deploy:
-    needs: test
+    needs: build
     runs-on: ubuntu-latest 
     steps:
-      - name: get Code
-        uses: actions/checkout@v7
-      - name: install Python 
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'    
-      - name: install reiquirments
-        run: pip install -r requirements.txt
-      - name: Install dbt
-        run: pip install dbt-core dbt-sqlserver
-      - name: deploy 
-        run: echo "deploy is done"
+      - name: download artifacts
+        uses: actions/download-artifact@v4
+        with: 
+          name: transformed_data
+      # - name: get Code
+      #   uses: actions/checkout@v7
+      # - name: install Python 
+      #   uses: actions/setup-python@v6
+      #   with:
+      #     python-version: '3.11'    
+      # - name: install reiquirments
+      #   run: pip install -r requirements.txt
+      # - name: Install dbt
+      #   run: pip install dbt-core dbt-sqlserver
+      # - name: deploy 
+      #   run: echo "deploy is done"
