@@ -45,6 +45,8 @@ jobs:
         uses: actions/download-artifact@v4
         with: 
           name: transformed_data
+      - name: list all artifact
+        run: ls
       # - name: get Code
       #   uses: actions/checkout@v7
       # - name: install Python 
