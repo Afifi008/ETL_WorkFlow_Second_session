@@ -74,7 +74,8 @@ jobs:
         with: 
           name: transformed_data
           path: |
-            data/*.csv
+            data/clean_sales.csv
+            data/sales_by_category.csv
       - name: list all artifact
         run: ls
       - name: deploy 
