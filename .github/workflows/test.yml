@@ -4,7 +4,7 @@ env:
   MONGO_HOST: 'cluster0.pip1qsl.mongodb.net'
   MONGO_DB: 'Demo'
   MONGO_USER: 'ahmedkhaledafifi22_db_user'
-  MONGO_PASSWORD: '1T7SUp0JncqWGO4C'
+  MONGO_PASSWORD: 'VCiCljbKq6EbtepJ'
 jobs:
   test:
     runs-on: ubuntu-latest 
