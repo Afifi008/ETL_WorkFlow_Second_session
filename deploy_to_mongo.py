@@ -1,0 +1,23 @@
+import os
+import pandas as pd
+from pathlib import Path
+from pymongo import MongoClient
+
+host = os.environ["MONGO_HOST"]
+db_name = os.environ["MONGO_DB"]
+user = os.environ["MONGO_USER"]
+password = os.environ["MONGO_PASSWORD"]
+
+uri = f"mongodb+srv://{user}:{password}@{host}/?appName=Cluster0"
+client = MongoClient(uri)
+db = client[db_name]
+
+# Read all CSVs from data/ folder and create a collection for each
+data_folder = Path("data")
+for csv_file in data_folder.glob("*.csv"):
+    collection_name = csv_file.stem          
+    df = pd.read_csv(csv_file)
+    collection = db[collection_name]
+    collection.delete_many({})
+    collection.insert_many(df.to_dict("records"))
+    print(f"Deployed {len(df)} records → {db_name}.{collection_name}")
