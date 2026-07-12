@@ -11,7 +11,7 @@ jobs:
       pass: 'abcd'
     steps:
       - name: eco env_Variables
-        run: echo $name
+        run: echo '$name + $pass '
   second_one:
     runs-on: ubuntu-latest
     steps:
