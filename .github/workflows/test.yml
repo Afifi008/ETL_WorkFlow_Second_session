@@ -2,7 +2,7 @@ name: test project
 on: [push,workflow_dispatch]
 env:
   MONGO_HOST: 'cluster0.pip1qsl.mongodb.net'
-  MONGO_BD: 'Demo'
+  MONGO_DB: 'Demo'
   MONGO_USER: 'AhmedAfifi'
   MONGO_PASSWORD: '1T7SUp0JncqWGO4C'
 jobs:
@@ -22,8 +22,6 @@ jobs:
           python-version: '3.11'    
       - name: install reiquirments
         run: pip install -r requirements.txt
-      - name: Install dbt
-        run: pip install dbt-core dbt-sqlserver
       - name: run test data quality 
         run: pytest tests/test_data_quality.py 
   build:
