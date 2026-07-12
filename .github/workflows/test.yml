@@ -73,9 +73,7 @@ jobs:
         uses: actions/download-artifact@v4
         with: 
           name: transformed_data
-          path: |
-            data/clean_sales.csv
-            data/sales_by_category.csv
+          path: data/
       - name: list all artifact
         run: ls
       - name: deploy 
