@@ -2,16 +2,14 @@ name: remove_yml
 on: push 
 env:
   name: 'Ahmed'
-  pass: '1234'
 jobs:
   first_one:
     runs-on: ubuntu-latest
     env:
       name: 'Afifi'
-      pass: 'abcd'
     steps:
       - name: eco env_Variables
-        run: echo '$name + $pass '
+        run: echo $name
   second_one:
     runs-on: ubuntu-latest
     steps:
