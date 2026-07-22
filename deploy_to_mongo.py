@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+from datetime import datetime, timezone
 from pathlib import Path
 from pymongo import MongoClient
 
@@ -17,6 +18,13 @@ data_folder = Path("data")
 for csv_file in data_folder.glob("*.csv"):
     collection_name = csv_file.stem          # clean_sales.csv → clean_sales
     df = pd.read_csv(csv_file)
+    records = df.to_dict("records")
+
+    # Add timestamp to each record
+    loaded_at = datetime.now(timezone.utc)
+    for record in records:
+        record["loaded_at"] = loaded_at
+
     collection = db[collection_name]
     collection.delete_many({})
     collection.insert_many(df.to_dict("records"))
