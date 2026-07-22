@@ -27,5 +27,5 @@ for csv_file in data_folder.glob("*.csv"):
 
     collection = db[collection_name]
     collection.delete_many({})
-    collection.insert_many(df.to_dict("records"))
+    collection.insert_many(records)
     print(f"Deployed {len(df)} records → {db_name}.{collection_name}")
