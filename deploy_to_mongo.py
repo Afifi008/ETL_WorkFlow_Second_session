@@ -15,7 +15,7 @@ db = client[db_name]
 # Read all CSVs from data/ folder and create a collection for each
 data_folder = Path("data")
 for csv_file in data_folder.glob("*.csv"):
-    collection_name = csv_file.stem          
+    collection_name = csv_file.stem          # clean_sales.csv → clean_sales
     df = pd.read_csv(csv_file)
     collection = db[collection_name]
     collection.delete_many({})
