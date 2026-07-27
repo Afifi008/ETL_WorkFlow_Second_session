@@ -21,6 +21,8 @@ jobs:
         run: pytest tests/test_data_quality.py 
       - name: generate artifact
         run: python build_output.py
+      - name: print failuer
+        run: echo "Test step has failed - skipping artifact generation"
       - name: upload artifacts
         uses: actions/upload-artifact@v4
         with: 
