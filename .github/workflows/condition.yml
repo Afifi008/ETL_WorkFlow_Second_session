@@ -21,10 +21,6 @@ jobs:
         continue-on-error: true 
         id: test_data_quality
         run: pytest tests/test_data_quality.py 
-      - name: print failuer
-        run: | 
-            echo "Test step has failed "
-            echo '${{ toJSON(github) }}'
       - name: generate artifact
         run: python build_output.py
       - name: upload artifacts
@@ -36,7 +32,6 @@ jobs:
             data/sales_by_category.csv
   report:
     needs: test
-    if: failure()
     runs-on: ubuntu-latest 
     steps:
       - name: print metadata
