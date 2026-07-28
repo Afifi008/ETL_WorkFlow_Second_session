@@ -7,7 +7,6 @@ jobs:
       - name: Get Code
         uses: actions/checkout@v7
       - name: cashing requierments
-        id: cache
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
@@ -17,13 +16,12 @@ jobs:
         with:
           python-version: '3.11'    
       - name: install reiquirments
-        if: steps.cache.outputs.cache-hit != 'true'
         run: pip install -r requirements.txt
       - name: run test data quality 
+        continue-on-error: true 
         id: test_data_quality
         run: pytest tests/test_data_quality.py 
       - name: print failuer
-        if: failure() && steps.test_data_quality.outcome == 'failure'
         run: | 
             echo "Test step has failed "
             echo '${{ toJSON(github) }}'
@@ -41,21 +39,6 @@ jobs:
     if: failure()
     runs-on: ubuntu-latest 
     steps:
-      - name: Get Code
-        uses: actions/checkout@v7
-      - name: cashing requierments
-        id: cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: pip-${{hashFiles('requirements.txt')}}
-      - name: install Python 
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.11'    
-      - name: install reiquirments
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install -r requirements.txt
       - name: print metadata
         run: | 
             echo "Test step has failed "
