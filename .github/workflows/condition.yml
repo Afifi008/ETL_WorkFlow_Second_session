@@ -23,7 +23,7 @@ jobs:
       - name: print failuer
         if: failure() && steps.test_data_quality.outcome == 'failure'
         run: | 
-            echo "Test step has failed - skipping artifact generation"
+            echo "Test step has failed "
             echo '${{ toJSON(github) }}'
       - name: generate artifact
         run: python build_output.py
@@ -34,3 +34,11 @@ jobs:
           path: |
             data/clean_sales.csv
             data/sales_by_category.csv
+  report:
+    if: failure()
+    runs-on: ubuntu-lates
+    steps:
+      - name: print metadata
+        run: | 
+            echo "Test step has failed "
+            echo '${{ toJSON(github) }}'
