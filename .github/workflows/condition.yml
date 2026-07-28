@@ -22,10 +22,10 @@ jobs:
         id: test_data_quality
         run: pytest tests/test_data_quality.py
       - name: outcome 
-        if: failure() && steps.test_data_quality.outcome == 'failure'
+        if: steps.test_data_quality.outcome == 'failure'
         run: echo "The step has been failed and I know it"
       - name: conclusion 
-        if: failure() && steps.test_data_quality.conclusion == 'failure'
+        if: steps.test_data_quality.conclusion == 'failure'
         run: echo "The step has been failed and I know it"
       - name: generate artifact
         run: python build_output.py
