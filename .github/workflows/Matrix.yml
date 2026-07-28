@@ -5,10 +5,15 @@ jobs:
   test:
     strategy:
       fail-fast: false
-      max-parallel: 3
       matrix:
         python-version: ['3.9', '3.10', '3.11']
         os: [ubuntu-latest, windows-latest]  
+        exclude:
+          - python-version: '3.9'
+            os: windows-latest
+        include: 
+          - python-version: '3.12'
+            os: ubuntu-latest
     runs-on: ${{ matrix.os}}
     steps:
       - name: Get Code
