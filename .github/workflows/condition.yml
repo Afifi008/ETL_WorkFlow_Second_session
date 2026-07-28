@@ -35,6 +35,7 @@ jobs:
             data/clean_sales.csv
             data/sales_by_category.csv
   report:
+    needs: test
     if: failure()
     runs-on: ubuntu-lates
     steps:
