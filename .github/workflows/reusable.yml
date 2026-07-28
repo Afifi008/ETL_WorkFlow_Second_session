@@ -19,3 +19,8 @@ jobs:
         run: pip install -r requirements.txt
       - name: run test data quality 
         run: pytest tests/test_data_quality.py 
+  dummy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: print something
+        run: echo "something"
