@@ -1,5 +1,11 @@
 name: test job
-on: workflow_call 
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        type: string
+      test-file:
+        type: string
 jobs:
   test:
     runs-on: ubuntu-latest 
@@ -14,11 +20,11 @@ jobs:
       - name: install Python 
         uses: actions/setup-python@v6
         with:
-          python-version: '3.11'    
+          python-version: ${{ inputs.python-version}}  
       - name: install reiquirments
         run: pip install -r requirements.txt
       - name: run test data quality 
-        run: pytest tests/test_data_quality.py 
+        run: pytest ${{ inputs.test-file}} -v 
   dummy:
     runs-on: ubuntu-latest
     steps:
