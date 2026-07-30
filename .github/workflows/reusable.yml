@@ -17,6 +17,8 @@ jobs:
         with:
           path: ~/.cache/pip
           key: pip-${{hashFiles('requirements.txt')}}
+      - name: print python version 
+        run: echo "python version is ${{inputs.python-version}}"
       - name: install Python 
         uses: actions/setup-python@v6
         with:
