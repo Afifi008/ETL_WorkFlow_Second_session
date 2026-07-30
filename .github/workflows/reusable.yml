@@ -7,15 +7,15 @@ on:
       test-file:
         type: string
     outputs:
-      Number_of_Rows: 
-        value: ${{jobs.test.outputs.rows}}
-      Test_Status: 
-        value: ${{jobs.test.outputs.result}}
+      test_status:
+        value: ${{jobs.test.outputs.test_outcome}}
+      row_count:
+        value: ${{jobs.test.outputs.Num_of_rows}}
 jobs:
   test:
     outputs:
-      rows: ${{ steps.count.outputs.rows}}
-      result: ${{steps.run_test.outcome}}
+      test_outcome: ${{steps.test_step.outcome}}
+      Num_of_rows: ${{ steps.count.outputs.rows}}
     runs-on: ubuntu-latest 
     steps:
       - name: Get Code
@@ -34,13 +34,13 @@ jobs:
       - name: install reiquirments
         run: pip install -r requirements.txt
       - name: run test data quality 
-        id: run_test
+        id: test_step
         run: pytest ${{ inputs.test-file}} -v 
       - name: count of rows
         id: count
         run: |
           ROW=$(wc -l < data/raw_sales.csv)
-          echo "rows=$ROW" >> $GITHUB_OUTPUT
+          echo "rows=ROWS" >> $GITHUB_OUTPUT
   dummy:
     runs-on: ubuntu-latest
     steps:
