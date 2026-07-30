@@ -14,7 +14,7 @@ jobs:
 
   show_results:
     needs: test
-    runs-one: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: show the results
         run: |
